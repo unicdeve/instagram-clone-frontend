@@ -11,6 +11,10 @@ import setAuthToken from './util/setAuthToken';
 import authTypes from './redux/auth/auth.types';
 import isEmpty from './util/isEmpty';
 
+import PrivateRoute from './util/PrivateRoute';
+import HomePage from './pages/home/home.page';
+import CustomLayout from './components/layout/layout.comp';
+
 function App({ dispatch }) {
   let userAuth = !isEmpty(localStorage.auth);
 
@@ -30,6 +34,12 @@ function App({ dispatch }) {
   return (
     <>
       <Switch>
+        <PrivateRoute
+          exact
+          path='/'
+          layout={CustomLayout}
+          component={HomePage}
+        />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/signup' component={SignUpPage} />
       </Switch>

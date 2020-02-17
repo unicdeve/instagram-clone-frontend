@@ -8,3 +8,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
+
+.custom-nav {
+  padding: 0.6rem 25rem !important;
+}

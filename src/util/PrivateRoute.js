@@ -5,13 +5,20 @@ import { createStructuredSelector } from 'reselect';
 
 import { selectIsAuthenticated } from '../redux/auth/auth.selector';
 
-function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
+function PrivateRoute({
+  component: Component,
+  layout: Layout,
+  isAuthenticated,
+  ...rest
+}) {
   return (
     <Route
       {...rest}
       render={props =>
         isAuthenticated === true ? (
-          <Component {...props} />
+          <Layout>
+            <Component {...props} />
+          </Layout>
         ) : (
           <Redirect to='/login' />
         )
