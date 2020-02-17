@@ -11,4 +11,8 @@ export const ButtonWrapper = styled.button`
   text-align: center;
   user-select: none;
   width: auto;
+
+  &:focus {
+    border: none;
+  }
 `;
