@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { CardWrapper, CardFormContainer, CardFooter } from './signup.styles';
 import BorderLessButton from '../../components/BorderLessButton/BorderLessButton.comp';
 import SignUpForm from '../../components/signup-form/signup-form.comp';
 import CardHeader from '../../components/card-header/card-header.comp';
+import { selectIsAuthenticated } from '../../redux/auth/auth.selector';
+import { createStructuredSelector } from 'reselect';
 
-export default function SignUpPage() {
+function SignUpPage({ history, isAuthenticated }) {
+  useEffect(() => {
+    if (isAuthenticated) history.push('/');
+  }, [isAuthenticated, history]);
+
   return (
     <div className='container p-2 p-lg-5'>
       <div className='row justify-content-center'>
@@ -40,3 +47,9 @@ export default function SignUpPage() {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectIsAuthenticated
+});
+
+export default connect(mapStateToProps)(SignUpPage);

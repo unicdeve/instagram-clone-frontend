@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import {
   CardWrapper,
@@ -11,8 +13,13 @@ import BorderLessButton from '../../components/BorderLessButton/BorderLessButton
 import OrRuler from '../../components/or-ruler/or-ruler.comp';
 import LoginForm from '../../components/login-form/login-form.comp';
 import CardHeader from '../../components/card-header/card-header.comp';
+import { selectIsAuthenticated } from '../../redux/auth/auth.selector';
 
-function LoginPage({ history }) {
+function LoginPage({ isAuthenticated, history }) {
+  useEffect(() => {
+    if (isAuthenticated) history.push('/');
+  }, [isAuthenticated, history]);
+
   return (
     <div className='container p-2 p-lg-5'>
       <div className='row justify-content-center'>
@@ -49,4 +56,8 @@ function LoginPage({ history }) {
   );
 }
 
-export default LoginPage;
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectIsAuthenticated
+});
+
+export default connect(mapStateToProps)(LoginPage);
