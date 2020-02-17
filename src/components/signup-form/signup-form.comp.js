@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { Button, Form, Message } from 'semantic-ui-react';
 
-import { useForm } from '../../util/hooks';
 import { signupUser, clearErrors } from '../../redux/auth/auth.actions';
+import { selectAuth } from '../../redux/auth/auth.selector';
+import { useForm } from '../../util/hooks';
 import isEmpty from '../../util/isEmpty';
 
 function SignUpForm({
@@ -111,8 +113,8 @@ function SignUpForm({
   );
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = createStructuredSelector({
+  auth: selectAuth
 });
 
 export default connect(mapStateToProps, {

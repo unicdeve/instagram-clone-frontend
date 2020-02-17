@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { Button, Form, Message } from 'semantic-ui-react';
 
 import { signinUser, clearErrors } from '../../redux/auth/auth.actions';
+import { selectAuth } from '../../redux/auth/auth.selector';
 import isEmpty from '../../util/isEmpty';
 import { useForm } from '../../util/hooks';
 
@@ -78,8 +80,8 @@ function LoginForm({
   );
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = createStructuredSelector({
+  auth: selectAuth
 });
 
 const mapDispatchToProps = {
