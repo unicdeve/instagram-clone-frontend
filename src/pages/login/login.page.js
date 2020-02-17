@@ -36,7 +36,7 @@ function LoginPage({ history }) {
           {/* end of login card */}
 
           {/* footer card */}
-          <CardWrapper className='p-3 mt-3'>
+          <CardWrapper className='p-3 mt-3 text-center'>
             Don't have an account?{' '}
             <Link to='/signup'>
               <BorderLessButton>Sign up</BorderLessButton>

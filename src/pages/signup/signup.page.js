@@ -28,7 +28,7 @@ export default function SignUpPage() {
           {/* end of login card */}
 
           {/* footer card */}
-          <CardWrapper className='p-3 mt-3'>
+          <CardWrapper className='p-3 mt-3 text-center'>
             Have an account?{' '}
             <Link to='/login'>
               <BorderLessButton>Log in</BorderLessButton>

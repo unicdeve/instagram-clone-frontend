@@ -4,25 +4,32 @@ import { Button, Form, Message } from 'semantic-ui-react';
 
 import { signinUser, clearErrors } from '../../redux/auth/auth.actions';
 import isEmpty from '../../util/isEmpty';
+import { useForm } from '../../util/hooks';
 
-function LoginForm({ signIn, errors: dataErrors, clearAllErrors }) {
-  const [values, setValues] = useState({
-    username: '',
-    password: ''
-  });
+function LoginForm({
+  signIn,
+  auth: { errors: dataErrors, loading },
+  clearAllErrors
+}) {
+  const { values, handleChange, handleSubmit } = useForm(
+    handleSignInCallback,
+    changeCallback,
+    {
+      username: '',
+      password: ''
+    }
+  );
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = e => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+  function handleSignInCallback() {
+    signIn(values);
+  }
+
+  function changeCallback() {
     clearAllErrors();
     setErrors({});
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    signIn(values);
-  };
+  }
 
   useEffect(() => {
     if (!isEmpty(dataErrors)) {
@@ -65,14 +72,14 @@ function LoginForm({ signIn, errors: dataErrors, clearAllErrors }) {
           placeholder='Password'
         />
 
-        <Button fluid content='Log In' primary />
+        <Button fluid content='Log In' primary loading={loading} />
       </Form>
     </>
   );
 }
 
 const mapStateToProps = state => ({
-  errors: state.auth.errors
+  auth: state.auth
 });
 
 const mapDispatchToProps = {
