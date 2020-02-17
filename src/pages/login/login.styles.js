@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
   width: 100%;
-  text-align: center;
   border: 1px solid #eee;
   padding: 3rem;
 `;
