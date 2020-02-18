@@ -4,6 +4,7 @@ import isEmpty from '../../util/isEmpty';
 const initialState = {
   isAuthenticated: false,
   currentUser: {},
+  currentUserProfile: {},
   errors: null,
   loading: false
 };
@@ -32,6 +33,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         errors: action.payload
+      };
+
+    case authTypes.SET_CURRENT_USER_PROFILE:
+      return {
+        ...state,
+        currentUserProfile: action.payload
       };
 
     case authTypes.CLEAR_ERROR:

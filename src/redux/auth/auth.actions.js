@@ -43,6 +43,23 @@ export const signupUser = userData => dispatch => {
     });
 };
 
+export const getCurrentUserProfile = userId => dispatch => {
+  axios
+    .get(`/profiles/details?user=${userId}`)
+    .then(res => {
+      dispatch({
+        type: authTypes.SET_CURRENT_USER_PROFILE,
+        payload: res.data[0]
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: authTypes.SET_CURRENT_USER_PROFILE,
+        payload: {}
+      });
+    });
+};
+
 export const clearErrors = () => ({
   type: authTypes.CLEAR_ERROR
 });
