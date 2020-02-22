@@ -39,7 +39,7 @@ export default function Header() {
         </LinkOption>
 
         <LinkOption to='/notifications'>
-          <Icon size='big' name='like' color='black' />
+          <Icon size='big' name='heart outline' color='black' />
         </LinkOption>
 
         <LinkOption to='/notifications'>

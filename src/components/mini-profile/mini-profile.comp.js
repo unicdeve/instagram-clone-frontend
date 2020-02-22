@@ -18,7 +18,13 @@ import {
   MiniProfileImg
 } from './mini-profile.styles';
 
-function MiniProfileComponent({ currentUser, getProfile, currentUserProfile }) {
+function MiniProfileComponent({
+  currentUser,
+  getProfile,
+  currentUserProfile,
+  showName,
+  imgSize
+}) {
   const { user_id, username, full_name } = currentUser;
 
   useEffect(() => {
@@ -30,7 +36,7 @@ function MiniProfileComponent({ currentUser, getProfile, currentUserProfile }) {
       {!isEmpty(currentUser) && !isEmpty(currentUserProfile) ? (
         <RightWrapper>
           <MiniProfileWrapper>
-            <MiniProfileImgWrapper>
+            <MiniProfileImgWrapper imgSize={imgSize}>
               <MiniProfileImg
                 src={currentUserProfile.image}
                 alt='profile-img'
@@ -41,9 +47,12 @@ function MiniProfileComponent({ currentUser, getProfile, currentUserProfile }) {
               <Header as='h4' className='p-0 m-0'>
                 {username}
               </Header>
-              <Header as='h6' className='p-0 m-0 text-muted'>
-                {full_name}
-              </Header>
+
+              {showName && (
+                <Header as='h6' className='p-0 m-0 text-muted'>
+                  {full_name}
+                </Header>
+              )}
             </MiniProfile>
           </MiniProfileWrapper>
         </RightWrapper>

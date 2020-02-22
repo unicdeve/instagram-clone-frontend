@@ -12,8 +12,8 @@ export const MiniProfileWrapper = styled.div`
 `;
 
 export const MiniProfileImgWrapper = styled.div`
-  height: 52px;
-  width: 52px;
+  height: ${props => props.imgSize}px;
+  width: ${props => props.imgSize}px;
   margin-right: 1rem;
 `;
 

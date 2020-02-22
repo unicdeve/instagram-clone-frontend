@@ -12,3 +12,9 @@ body {
 .custom-nav {
   padding: 0.6rem 25rem !important;
 }
+
+@media screen and (max-width: 800px) {
+  .custom-nav {
+    padding: 1rem 0.8rem !important;
+  }
+}
