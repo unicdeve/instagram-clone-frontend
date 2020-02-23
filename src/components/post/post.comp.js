@@ -13,13 +13,15 @@ import { Icon } from 'semantic-ui-react';
 import PostActions from '../post-actions/post-actions.comp';
 
 function Post({ post }) {
-  console.log(post);
+  // console.log(post);
 
   const {
     user: { profile: userProfile, ...userData },
+    id,
     posted_at,
     likesCount,
-    caption
+    caption,
+    likes
   } = post;
 
   const profile = {
@@ -43,9 +45,11 @@ function Post({ post }) {
         </ArticleImgWrapper>
 
         <PostActions
+          postId={id}
           posted_at={posted_at}
           likesCount={likesCount}
           caption={caption}
+          likes={likes}
         />
       </PostArticle>
     </PostsWrapper>

@@ -22,3 +22,41 @@ export const getPosts = () => dispatch => {
       });
     });
 };
+
+export const likePost = postId => dispatch => {
+  axios
+    .post('/posts/like/', { post: postId })
+    .then(res => {
+      dispatch({
+        type: postsTypes.LIKE_POST,
+        payload: {
+          postId,
+          newLike: {
+            id: res.data.id,
+            user: res.data.user,
+            liked_at: res.data.liked_at
+          }
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const unlikePost = (postId, likeId, user_id) => dispatch => {
+  axios
+    .delete(`/posts/like/${likeId}`)
+    .then(res => {
+      dispatch({
+        type: postsTypes.UNLIKE_POST,
+        payload: {
+          postId,
+          user_id
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

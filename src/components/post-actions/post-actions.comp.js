@@ -18,17 +18,22 @@ import {
 } from './post-actions.styles';
 import BorderLessButton from '../BorderLessButton/BorderLessButton.comp';
 import { Icon } from 'semantic-ui-react';
+import LikeButton from '../like-button/like-button.comp';
 
-export default function PostActions({ posted_at, likesCount, caption }) {
+export default function PostActions({
+  postId,
+  posted_at,
+  likesCount,
+  caption,
+  likes
+}) {
   dayjs.extend(relativeTime);
 
   return (
     <ArticleActionsWrapper>
       <ArticleActionIcons>
         <LeftIcons>
-          <IconWrapper>
-            <Icon name='heart outline' size='large' color='black' />
-          </IconWrapper>
+          <LikeButton likes={likes} postId={postId} />
 
           <IconWrapper>
             <Icon name='comment outline' size='large' color='black' />
