@@ -1,14 +1,6 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-import { createStructuredSelector } from 'reselect';
-import {
-  selectCurrentUser,
-  selectCurrentUserProfile
-} from '../../redux/auth/auth.selector';
-import isEmpty from '../../util/isEmpty';
 import { Header } from 'semantic-ui-react';
-import { getCurrentUserProfile } from '../../redux/auth/auth.actions';
 
 import {
   RightWrapper,
@@ -17,30 +9,18 @@ import {
   MiniProfile,
   MiniProfileImg
 } from './mini-profile.styles';
+import isEmpty from '../../util/isEmpty';
 
-function MiniProfileComponent({
-  currentUser,
-  getProfile,
-  currentUserProfile,
-  showName,
-  imgSize
-}) {
-  const { user_id, username, full_name } = currentUser;
-
-  useEffect(() => {
-    getProfile(user_id);
-  }, [user_id, getProfile]);
+function MiniProfileComponent({ showName, imgSize, profile }) {
+  const { username, full_name, image } = profile;
 
   return (
     <>
-      {!isEmpty(currentUser) && !isEmpty(currentUserProfile) ? (
+      {!isEmpty(profile) ? (
         <RightWrapper>
           <MiniProfileWrapper>
             <MiniProfileImgWrapper imgSize={imgSize}>
-              <MiniProfileImg
-                src={currentUserProfile.image}
-                alt='profile-img'
-              />
+              <MiniProfileImg src={image} alt='profile-img' />
             </MiniProfileImgWrapper>
 
             <MiniProfile>
@@ -63,16 +43,4 @@ function MiniProfileComponent({
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  currentUserProfile: selectCurrentUserProfile
-});
-
-const mapDispatchToProps = {
-  getProfile: getCurrentUserProfile
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MiniProfileComponent);
+export default MiniProfileComponent;
