@@ -13,8 +13,6 @@ import { Icon } from 'semantic-ui-react';
 import PostActions from '../post-actions/post-actions.comp';
 
 function Post({ post }) {
-  // console.log(post);
-
   const {
     user: { profile: userProfile, ...userData },
     id,

@@ -14,9 +14,7 @@ function LikeButton({ likes, postId, currentUser: { user_id }, like, unlike }) {
     const likedPost = likes.find(like => like.user === user_id);
 
     if (likedPost) {
-      console.log('likedPost', likedPost);
       likeId = likedPost.id;
-      // console.log(likeId);
       return true;
     } else return false;
   };

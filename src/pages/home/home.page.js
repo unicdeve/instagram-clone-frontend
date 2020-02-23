@@ -29,9 +29,10 @@ function HomePage(props) {
   }, [getAllPosts, getProfile, user_id]);
 
   const profile = {
-    ...currentUser,
-    image: userProfile.image
+    ...currentUser
   };
+
+  if (userProfile) profile.image = userProfile.image;
 
   return (
     <div className='row'>
@@ -40,8 +41,10 @@ function HomePage(props) {
       </div>
 
       <div className='col-md-4 d-none d-lg-block'>
-        {currentUser && userProfile && (
+        {currentUser && userProfile ? (
           <MiniProfileCompononent profile={profile} showName imgSize={52} />
+        ) : (
+          <p>No profile found</p>
         )}
       </div>
     </div>

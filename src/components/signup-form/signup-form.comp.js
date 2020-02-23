@@ -28,6 +28,7 @@ function SignUpForm({
   );
 
   function signUpCallback() {
+    console.log(values);
     signUp(values);
   }
 
