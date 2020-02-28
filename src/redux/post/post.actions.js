@@ -107,3 +107,26 @@ export const unlikeComment = (
       console.log(err);
     });
 };
+
+export const postComment = (postId, body, user) => dispatch => {
+  axios
+    .post('/posts/comment/', { post: postId, body })
+    .then(res => {
+      dispatch({
+        type: postsTypes.POST_COMMENT,
+        payload: {
+          postId,
+          newComment: {
+            id: res.data.id,
+            user,
+            body: res.data.body,
+            created_at: res.data.created_at,
+            likes: []
+          }
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

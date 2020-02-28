@@ -11,17 +11,14 @@ import {
   LikeCountWrapper,
   ArticleCaption,
   PostedAtWrapper,
-  CommentFormWrapper,
   RightIconWrapper,
-  CommentInput,
-  CommentForm,
   CommentsWrapper,
   CommentsCount
 } from './post-actions.styles';
-import BorderLessButton from '../BorderLessButton/BorderLessButton.comp';
 import { Icon } from 'semantic-ui-react';
 import LikeButton from '../like-button/like-button.comp';
 import SingleComment from '../single-comment/single-comment.com';
+import CommentForm from '../comment-form/comment-form.comp';
 
 export default function PostActions({
   postId,
@@ -85,12 +82,7 @@ export default function PostActions({
 
       <PostedAtWrapper>{dayjs(posted_at).fromNow()}</PostedAtWrapper>
 
-      <CommentFormWrapper>
-        <CommentForm>
-          <CommentInput placeholder='Add comment...' width={13} />
-          <BorderLessButton disabled>Post</BorderLessButton>
-        </CommentForm>
-      </CommentFormWrapper>
+      <CommentForm postId={postId} />
     </ArticleActionsWrapper>
   );
 }

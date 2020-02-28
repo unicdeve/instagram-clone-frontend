@@ -81,6 +81,16 @@ const postsReducer = (state = initialState, action) => {
         ...state
       };
 
+    case postsTypes.POST_COMMENT:
+      state.posts[postIndex].comments = [
+        action.payload.newComment,
+        ...state.posts[postIndex].comments
+      ];
+
+      return {
+        ...state
+      };
+
     default:
       return state;
   }

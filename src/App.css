@@ -10,6 +10,10 @@ body {
   background: #fafafa;
 }
 
+p {
+  margin: 0 0 0.3rem !important;
+}
+
 .custom-nav {
   padding: 0.6rem 25rem !important;
 }
