@@ -7,9 +7,12 @@ const initialState = {
 };
 
 const postsReducer = (state = initialState, action) => {
-  const postIndex = state.posts.findIndex(
-    post => post.id === action.payload.postId
-  );
+  let postIndex;
+  if (action.payload) {
+    postIndex = state.posts.findIndex(
+      post => post.id === action.payload.postId
+    );
+  }
 
   switch (action.type) {
     case postsTypes.GET_POSTS:
