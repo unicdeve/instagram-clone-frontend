@@ -19,7 +19,8 @@ function Post({ post }) {
     posted_at,
     likesCount,
     caption,
-    likes
+    likes,
+    comments
   } = post;
 
   const profile = {
@@ -48,6 +49,8 @@ function Post({ post }) {
           likesCount={likesCount}
           caption={caption}
           likes={likes}
+          username={userData.username}
+          comments={comments}
         />
       </PostArticle>
     </PostsWrapper>

@@ -8,6 +8,7 @@ import {
 } from './header.styles';
 import { Icon } from 'semantic-ui-react';
 import CardHeader from '../card-header/card-header.comp';
+import AddPostButton from '../add-post-button/add-post-button.comp';
 
 export default function Header() {
   const [isTop, setIsTop] = useState(false);
@@ -34,6 +35,7 @@ export default function Header() {
       </LogoContainer>
 
       <IconLinkOptionWrapper>
+        <AddPostButton />
         <LinkOption to='/explore'>
           <Icon size='big' name='compass outline' color='black' />
         </LinkOption>

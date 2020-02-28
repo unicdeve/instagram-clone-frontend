@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 export const ArticleActionsWrapper = styled.div`
@@ -46,7 +47,7 @@ export const PostedAtWrapper = styled.div`
   font-size: 10px;
 `;
 
-export const CommentWrapper = styled.div`
+export const CommentFormWrapper = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.25);
 `;
 
@@ -73,4 +74,12 @@ export const CommentInput = styled.input`
 
 export const FormButton = styled(Button)`
   background: 0 0;
+`;
+
+export const CommentsWrapper = styled.div`
+  padding: 0 0 4px 0.8rem;
+`;
+
+export const CommentsCount = styled(Link)`
+  color: rgba(0, 0, 0, 0.25);
 `;

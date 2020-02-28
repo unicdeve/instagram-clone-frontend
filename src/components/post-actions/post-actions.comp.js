@@ -11,23 +11,30 @@ import {
   LikeCountWrapper,
   ArticleCaption,
   PostedAtWrapper,
-  CommentWrapper,
+  CommentFormWrapper,
   RightIconWrapper,
   CommentInput,
-  CommentForm
+  CommentForm,
+  CommentsWrapper,
+  CommentsCount
 } from './post-actions.styles';
 import BorderLessButton from '../BorderLessButton/BorderLessButton.comp';
 import { Icon } from 'semantic-ui-react';
 import LikeButton from '../like-button/like-button.comp';
+import SingleComment from '../single-comment/single-comment.com';
 
 export default function PostActions({
   postId,
   posted_at,
   likesCount,
   caption,
-  likes
+  comments,
+  likes,
+  username
 }) {
   dayjs.extend(relativeTime);
+
+  console.log(comments);
 
   return (
     <ArticleActionsWrapper>
@@ -58,16 +65,34 @@ export default function PostActions({
 
       <LikeCountWrapper>{likesCount} likes</LikeCountWrapper>
 
-      {caption && <ArticleCaption>{caption}</ArticleCaption>}
+      {caption && (
+        <ArticleCaption>
+          <span className='font-weight-bolder pr-2'>{username}</span>
+          {caption}
+        </ArticleCaption>
+      )}
+
+      {comments && (
+        <CommentsWrapper>
+          {comments.length > 0 && (
+            <CommentsCount to='/post-details'>
+              View all {comments.length} comments
+            </CommentsCount>
+          )}
+          {comments.map(comment => (
+            <SingleComment key={comment.id} comment={comment} />
+          ))}
+        </CommentsWrapper>
+      )}
 
       <PostedAtWrapper>{dayjs(posted_at).fromNow()}</PostedAtWrapper>
 
-      <CommentWrapper>
+      <CommentFormWrapper>
         <CommentForm>
           <CommentInput placeholder='Add comment...' width={13} />
           <BorderLessButton disabled>Post</BorderLessButton>
         </CommentForm>
-      </CommentWrapper>
+      </CommentFormWrapper>
     </ArticleActionsWrapper>
   );
 }
