@@ -60,3 +60,50 @@ export const unlikePost = (postId, likeId, user_id) => dispatch => {
       console.log(err);
     });
 };
+
+export const likeComment = (postId, commentId) => dispatch => {
+  axios
+    .post('/posts/like-comment/', { comment: commentId })
+    .then(res => {
+      const payload = {
+        postId,
+        commentId,
+        newLike: {
+          id: res.data.id,
+          user: res.data.user,
+          liked_at: res.data.liked_at
+        }
+      };
+
+      dispatch({
+        type: postsTypes.LIKE_COMMENT,
+        payload
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export const unlikeComment = (
+  postId,
+  commentId,
+  likeId,
+  user_id
+) => dispatch => {
+  axios
+    .delete(`/posts/like-comment/${likeId}`)
+    .then(res => {
+      dispatch({
+        type: postsTypes.UNLIKE_COMMENT,
+        payload: {
+          postId,
+          commentId,
+          user_id
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

@@ -3,7 +3,8 @@ import LikeButton from '../like-button/like-button.comp';
 
 export default function SingleComment(props) {
   const {
-    comment: { id, body, user, likes }
+    comment: { id, body, user, likes },
+    postId
   } = props;
   return (
     <div className='d-flex justify-content-between'>
@@ -12,7 +13,7 @@ export default function SingleComment(props) {
         {body}
       </p>
 
-      <LikeButton likes={likes} commentId={id} />
+      <LikeButton likes={likes} commentId={id} postId={postId} />
     </div>
   );
 }

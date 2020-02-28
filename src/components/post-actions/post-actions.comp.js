@@ -34,8 +34,6 @@ export default function PostActions({
 }) {
   dayjs.extend(relativeTime);
 
-  console.log(comments);
-
   return (
     <ArticleActionsWrapper>
       <ArticleActionIcons>
@@ -80,7 +78,7 @@ export default function PostActions({
             </CommentsCount>
           )}
           {comments.map(comment => (
-            <SingleComment key={comment.id} comment={comment} />
+            <SingleComment key={comment.id} comment={comment} postId={postId} />
           ))}
         </CommentsWrapper>
       )}

@@ -7,6 +7,10 @@ const initialState = {
 };
 
 const postsReducer = (state = initialState, action) => {
+  const postIndex = state.posts.findIndex(
+    post => post.id === action.payload.postId
+  );
+
   switch (action.type) {
     case postsTypes.GET_POSTS:
       return {
@@ -22,10 +26,6 @@ const postsReducer = (state = initialState, action) => {
       };
 
     case postsTypes.LIKE_POST:
-      const postIndex = state.posts.findIndex(
-        post => post.id === action.payload.postId
-      );
-
       state.posts[postIndex] = {
         ...state.posts[postIndex],
         likes: [...state.posts[postIndex].likes, action.payload.newLike]
@@ -36,17 +36,45 @@ const postsReducer = (state = initialState, action) => {
       };
 
     case postsTypes.UNLIKE_POST:
-      const postIndex2 = state.posts.findIndex(
-        post => post.id === action.payload.postId
-      );
-
-      state.posts[postIndex2] = {
-        ...state.posts[postIndex2],
+      state.posts[postIndex] = {
+        ...state.posts[postIndex],
         likes: [
-          ...state.posts[postIndex2].likes.filter(
+          ...state.posts[postIndex].likes.filter(
             like => like.user !== action.payload.user_id
           )
         ]
+      };
+
+      return {
+        ...state
+      };
+
+    case postsTypes.LIKE_COMMENT:
+      const commentIndex = state.posts[postIndex].comments.findIndex(
+        comment => comment.id === action.payload.commentId
+      );
+      state.posts[postIndex].comments[commentIndex] = {
+        ...state.posts[postIndex].comments[commentIndex],
+        likes: [
+          ...state.posts[postIndex].comments[commentIndex].likes,
+          action.payload.newLike
+        ]
+      };
+
+      return {
+        ...state
+      };
+
+    case postsTypes.UNLIKE_COMMENT:
+      const index = state.posts[postIndex].comments.findIndex(
+        comment => comment.id === action.payload.commentId
+      );
+
+      state.posts[postIndex].comments[index] = {
+        ...state.posts[postIndex].comments[index],
+        likes: state.posts[postIndex].comments[index].likes.filter(
+          like => like.user !== action.payload.user_id
+        )
       };
 
       return {

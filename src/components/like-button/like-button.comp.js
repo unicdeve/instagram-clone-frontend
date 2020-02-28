@@ -6,12 +6,21 @@ import { Icon } from 'semantic-ui-react';
 
 import { selectCurrentUser } from '../../redux/auth/auth.selector';
 import { IconWrapper } from '../post-actions/post-actions.styles';
-import { likePost, unlikePost } from '../../redux/post/post.actions';
+import {
+  likePost,
+  unlikePost,
+  likeComment,
+  unlikeComment
+} from '../../redux/post/post.actions';
 
-function LikeButton(
-  { likes, postId, currentUser: { user_id }, like, unlike },
-  commentId
-) {
+function LikeButton(props) {
+  const {
+    likes,
+    postId,
+    commentId,
+    currentUser: { user_id }
+  } = props;
+
   let likeId;
   const liked = () => {
     const likedPost = likes.find(like => like.user === user_id);
@@ -24,13 +33,16 @@ function LikeButton(
 
   const likeButton = liked() ? (
     <>
-      {/* onClick={() => unlikeComment(postId, likeId, user_id)} */}
       {commentId ? (
-        <IconWrapper>
+        <IconWrapper
+          onClick={() =>
+            props.unlikeComment(postId, commentId, likeId, user_id)
+          }
+        >
           <Icon name='heart' size='small' color='red' />
         </IconWrapper>
       ) : (
-        <IconWrapper onClick={() => unlike(postId, likeId, user_id)}>
+        <IconWrapper onClick={() => props.unlikePost(postId, likeId, user_id)}>
           <Icon name='heart' size='large' color='red' />
         </IconWrapper>
       )}
@@ -38,12 +50,11 @@ function LikeButton(
   ) : (
     <>
       {commentId ? (
-        // onClick={() => likeComment(postId)}
-        <IconWrapper>
+        <IconWrapper onClick={() => props.likeComment(postId, commentId)}>
           <Icon name='heart outline' size='small' color='black' />
         </IconWrapper>
       ) : (
-        <IconWrapper onClick={() => like(postId)}>
+        <IconWrapper onClick={() => props.likePost(postId)}>
           <Icon name='heart outline' size='large' color='black' />
         </IconWrapper>
       )}
@@ -58,8 +69,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  like: likePost,
-  unlike: unlikePost
+  likePost,
+  unlikePost,
+  likeComment,
+  unlikeComment
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LikeButton);
