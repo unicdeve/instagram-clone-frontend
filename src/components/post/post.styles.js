@@ -11,7 +11,7 @@ export const PostArticle = styled.article`
   display: flex;
   flex-direction: column;
   border: 0.2px solid rgba(0, 0, 0, 0.25);
-  height: 80vh;
+  height: 100%;
 `;
 
 export const ArticleHeader = styled.div`
